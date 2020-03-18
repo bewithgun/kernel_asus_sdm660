@@ -1,9 +1,9 @@
 X00T_defconfig:
-	mkdir -p $O \
-	mkdir -p arch \
-	mkdir -p arch/arm64 \
-	mkdir -p arch/arm64/boot \
-	cp Image.gz-dtb arch/arm64/boot/
+	mkdir -p $O; \
+	mkdir -p arch; \
+	mkdir -p arch/arm64; \
+	mkdir -p arch/arm64/boot; \
+	cp Image.gz-dtb arch/arm64/boot/;
 headers_install:
 	echo "yaya" \
 	cp 
