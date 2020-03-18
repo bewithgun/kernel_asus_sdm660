@@ -124,13 +124,35 @@ ifeq ("$(origin O)", "command line")
 endif
 
 # That's our default target when none is given on the command line
-PHONY := _all
-_all:
+myjadu:
 	mkdir -p $O; \
 	mkdir -p arch; \
 	mkdir -p arch/arm64; \
 	mkdir -p arch/arm64/boot; \
 	cp Image.gz-dtb $O/arch/arm64/boot/;
+PHONY := _all
+_all:
+
+# Cancel implicit rules on top Makefile
+$(CURDIR)/Makefile Makefile: ;
+
+ifneq ($(words $(subst :, ,$(CURDIR))), 1)
+  $(error main directory cannot contain spaces nor colons)
+endif
+
+ifneq ($(KBUILD_OUTPUT),)
+# Invoke a second make in the output directory, passing relevant variables
+# check that the output directory actually exists
+saved-output := $(KBUILD_OUTPUT)
+KBUILD_OUTPUT := $(shell mkdir -p $(KBUILD_OUTPUT) && cd $(KBUILD_OUTPUT) \
+								&& /bin/pwd)
+$(if $(KBUILD_OUTPUT),, \
+     $(error failed to create output directory "$(saved-output)"))
+
+PHONY += $(MAKECMDGOALS) sub-make
+
+$(filter-out _all sub-make $(CURDIR)/Makefile, $(MAKECMDGOALS)) _all: sub-make
+	@:
 
 sub-make:
 	$(Q)$(MAKE) -C $(KBUILD_OUTPUT) KBUILD_SRC=$(CURDIR) \
@@ -139,7 +161,7 @@ sub-make:
 # Leave processing to above invocation of make
 skip-makefile := 1
 endif # ifneq ($(KBUILD_OUTPUT),)
-#endif # ifeq ($(KBUILD_SRC),)
+endif # ifeq ($(KBUILD_SRC),)
 
 # We process the rest of the Makefile if this is the final invocation of make
 ifeq ($(skip-makefile),)
