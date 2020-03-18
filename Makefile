@@ -13,3 +13,5 @@ dtbs:
 	echo "Making dtbs";
 modules:
 	echo "Making modules";
+modules_install:
+	echo "Making modules_install";
