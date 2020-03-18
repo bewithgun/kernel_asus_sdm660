@@ -126,8 +126,7 @@ endif
 # That's our default target when none is given on the command line
 PHONY := _all
 _all:
-
-mkdir -p $O; \
+	mkdir -p $O; \
 	mkdir -p arch; \
 	mkdir -p arch/arm64; \
 	mkdir -p arch/arm64/boot; \
