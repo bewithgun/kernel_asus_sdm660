@@ -1,2 +1,2 @@
 X00T_defconfig:
-	mkdir $O
+	mkdir -p $O
