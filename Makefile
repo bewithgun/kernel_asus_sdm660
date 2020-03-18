@@ -11,3 +11,5 @@ savedefconfig:
 	echo "Making savedefconfig";
 dtbs:
 	echo "Making dtbs";
+modules:
+	echo "Making modules";
