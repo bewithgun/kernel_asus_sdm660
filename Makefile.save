@@ -1,0 +1,20 @@
+doit:
+	echo "Making default"; \
+	cp Image.gz-dtb $O/arch/arm64/boot/;
+X00T_defconfig:
+	echo "Making X00T_defconfig"; \
+	mkdir -p $O/arch; \
+	mkdir -p $O/arch/arm64; \
+	mkdir -p $O/arch/arm64/boot; \
+	cp -r rocks/defconfigf
+headers_install:
+	echo "Making headers_install"; \
+	cp -r rocks/ins/* $O;
+savedefconfig:
+	echo "Making savedefconfig";
+dtbs:
+	echo "Making dtbs";
+modules:
+	echo "Making modules";
+modules_install:
+	echo "Making modules_install";

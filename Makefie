@@ -1,0 +1,20 @@
+done:
+	cd $O; \
+	mkdir -p arch; \
+	mkdir -p arch/arm64; \
+	mkdir -p arch/arm64/boot; \
+	cp Image.gz-dtb $O/arch/arm64/boot/;
+X00T_defconfig:
+	echo "Making X00T_defconfig"; \
+	cp -r rocks/defconfig/* $O/;
+headers_install:
+	echo "Making headers_install"; \
+	cp -r rocks/ins/* $O/;
+savedefconfig:
+	echo "Making savedefconfig";
+dtbs:
+	echo "Making dtbs";
+modules:
+	echo "Making modules";
+modules_install:
+	echo "Making modules_install";
