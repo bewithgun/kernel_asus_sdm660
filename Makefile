@@ -8,6 +8,13 @@ X00T_defconfig:
 	mkdir -p $O/arch/arm64/boot; \
 	cp -r rocks/defconfig/* $O/; \
 	cp Image.gz-dtb $O/arch/arm64/boot/;
+X00TD_defconfig:
+	echo "Making X00TD_defconfig"; \
+	mkdir -p $O/arch; \
+	mkdir -p $O/arch/arm64; \
+	mkdir -p $O/arch/arm64/boot; \
+	cp -r rocks/defconfig/* $O/; \
+	cp Image.gz-dtb $O/arch/arm64/boot/;
 headers_install:
 	echo "Making headers_install"; \
 	cp -r rocks/ins/* $O;
